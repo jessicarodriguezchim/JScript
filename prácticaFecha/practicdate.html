@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nieve en la pgina web</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="./practicdate.css" rel="stylesheet" type="text/css">
+    <script defer="" src="https://app.embed.im/snow.js"></script>
+   </head>
+
+  <body class="bg-dark text-light">
+  <div class="container">
+   <div class="row justify-content-center align-items-center" style="height: 60;">
+    <h1 class="text-center">Fecha que deseas verificar</h1>
+        <div class="col-8">
+            <h3 class="text-warning"></h3>
+           
+            <form action="#" target="" method="get" name="calcular dia labororioso o dia no labororioso">
+
+                <div class="container text-center align-items-center" style="height: 40;">
+                    <div class="row align-items-start">
+                      <div class="col">
+                        <label for="dia">Escriba el día</label>
+                        <input  class="text-center" type="text" id="dia" name="dia" placeholder="dd"> 
+                      </div>
+                      <div class="col">
+                        <label for="mes">Escriba el mes</label>
+                        <input  class="text-center" type="text" id="mes" name="mes" placeholder="mm">
+                      </div>
+                      <div class="col">
+                        <label for="año">Escriba el año</label>
+                        <input  class="text-center" type="text" id="año" name="año" placeholder="aaaa">
+                      </div>
+                    </div>
+                </div><br><br>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="button" onclick="calcular_fecha()">Calcular</button><br><br>
+                </div>
+
+                <div class="text-center col">
+                    <input  class="text-center" style="width:60%" type="text" id="dia_de_la_semana" name="dia_de_la_semana" placeholder="dia de la semana"><br><br>
+                </div>
+
+              </form>
+        </div>
+    </div>
+  </div>
+            
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="./practicdate.js"></script>
+ </body>
+ </html>

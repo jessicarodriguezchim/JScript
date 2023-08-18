@@ -1,0 +1,29 @@
+*{box-sizing:border-box;}
+
+form{
+	width:700px;
+	padding:16px;
+	border-radius:10px;
+	margin:auto;
+	background-color:#eabaf2;
+}
+
+form label{
+	width:72px;
+	font-weight:bolder;
+	display:inline-block;
+}
+
+form input{
+	width:187px;
+	padding:10px 30px;
+	border:1px solid #6114e8;
+	border-radius:40px;
+	background-color:#fbfafb;
+	margin:10px 10;
+	display:inline-block;
+}
+
+
+
+
