@@ -1,49 +1,54 @@
-const urlPeople = "https://reqres.in/api/users?delay=3";
+// URL de la API
+const urlPeople = "https://reqres.in/api/users?delay=1";
 
-/*
-const getProducts =  ( url )=>{
+// Función para obtener datos de la API y mostrarlos en la página
+const getPeople = async () => {
+    try {
+        const storedData = localStorage.getItem("personas");
+        const currentTime = Date.now();
 
-    fetch( url )
-        .then( ( resolve )=> {
-            console.log( resolve);
-            return resolve.json(); // conversión de JSON a Object
-        })
-        .then( ( resolveJson )=> {
-            console.log(resolveJson)
-            printToDOM( resolveJson);
+        if (storedData) {
+            const storedDataParsed = JSON.parse(storedData);
+            const expirationTime = storedDataParsed.expirationTime;         
 
-        })
-        .catch( (error)=> console.warn( error ) );
-};*/
+            if (currentTime < expirationTime) {
+                printToDOM(storedDataParsed.data);
+                return;
+            }
+        }
 
-const getPeople =  async ( )=>{
- try{
-     const resolve = await fetch( urlPeople );
-     const resolveJson = await resolve.json();
-     printToDOM( resolveJson );
-     localStorage.setItem("personas", JSON.stringify(resolveJson)   ); //stringify: Convierte un OBJ a JSON
- }
- catch( error ){
-    console.warn(error);
- }
-        
+        const resolve = await fetch(urlPeople);
+        const resolveJson = await resolve.json();
+        const expirationTime = currentTime + 60000; // 1 minuto
+        const dataWithTimestamp = {
+            expirationTime: expirationTime,
+            data: resolveJson.data
+        };
+        printToDOM(resolveJson);
+        localStorage.setItem("personas", JSON.stringify(dataWithTimestamp));
+    } catch (error) {
+        console.warn(error);
+    }
 };
 
-//getPeople( urlFakeStore );
-
-function printToDOM( personas ){
-    let arreglo_personas = personas.data;
-    let body = ""
-    for (var i = 0; i < arreglo_personas.length; i++) {      
-        body+=`<tr>
-        <td>${arreglo_personas[i].id}</td>
-        <td>${arreglo_personas[i].first_name}</td>
-        <td>${arreglo_personas[i].last_name}</td>
-        <td>${arreglo_personas[i].email}</td>
-        <td><img  src= "${arreglo_personas[i].avatar}"/>
-        </td></tr>`
+// Función para imprimir los datos en la tabla
+function printToDOM(personas) {
+    let arreglo_personas = personas;
+    let body = "";
+    for (let i = 0; i < arreglo_personas.length; i++) {
+        body += `
+            <tr>
+                <td>${arreglo_personas[i].id}</td>
+                <td>${arreglo_personas[i].first_name}</td>
+                <td>${arreglo_personas[i].last_name}</td>
+                <td>${arreglo_personas[i].email}</td>
+                <td><img src="${arreglo_personas[i].avatar}" alt="Avatar"/></td>
+            </tr>`;
     }
-    document.getElementById('data').innerHTML = body
-    console.log(body)
+    document.getElementById('data').innerHTML = body;
 }
 
+// Mostrar los datos al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    getPeople();
+});
